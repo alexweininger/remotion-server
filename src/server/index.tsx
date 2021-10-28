@@ -18,13 +18,19 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
 
-const webpackBundling = bundle(path.join(process.cwd(), 'src/index.tsx'));
+const webpackBundling = bundle(
+	path.join(process.cwd(), 'src/templates/index.tsx')
+);
 const tmpDir = fs.promises.mkdtemp(path.join(os.tmpdir(), 'remotion-'));
 
 enum Params {
 	compositionname,
 	format,
 }
+
+webpackBundling.then(() => {
+	console.log('Done bundling.');
+});
 
 const getComp = async (compName: string, inputProps: unknown) => {
 	const comps = await getCompositions(await webpackBundling, {
@@ -73,7 +79,7 @@ app.get(
 
 		if (await isInCache(hash)) {
 			const file = await getFromCache(hash);
-			return sendFile(res, file);
+			// return sendFile(res, file);
 		}
 
 		const output = path.join(await tmpDir, hash);
@@ -96,7 +102,7 @@ app.get(
 		});
 
 		await sendFile(res, fs.createReadStream(output));
-		await saveToCache(hash, await fs.promises.readFile(output));
+		// await saveToCache(hash, await fs.promises.readFile(output));
 		await fs.promises.unlink(output);
 	})
 );

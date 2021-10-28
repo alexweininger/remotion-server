@@ -1,7 +1,7 @@
 # This is a dockerized version of a server that you can easily deploy somewhere.
 # If you don't want server rendering, you can safely delete this file.
 
-FROM node:alpine
+FROM --platform=linux/amd64  node:alpine
 
 # Installs latest Chromium (85) package.
 RUN apk add --no-cache \

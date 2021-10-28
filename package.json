@@ -4,8 +4,8 @@
 	"description": "A template for designing still images with dynamic data with built-in server for deploying to the cloud.",
 	"scripts": {
 		"start": "ts-node src/server/index.tsx",
-		"dev": "remotion preview src/index.tsx",
-		"render": "remotion still src/index.tsx PreviewCard out/still.png",
+		"dev": "remotion preview src/templates/index.tsx",
+		"render": "remotion still src/templates/index.tsx PreviewCard out/still.png",
 		"upgrade": "remotion upgrade",
 		"server": "ts-node src/server/index.tsx",
 		"test": "eslint src --ext ts,tsx,js,jsx && tsc"
