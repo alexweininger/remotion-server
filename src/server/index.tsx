@@ -18,7 +18,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
 
-const webpackBundling = bundle(
+let webpackBundling = bundle(
 	path.join(process.cwd(), 'src/templates/index.tsx')
 );
 const tmpDir = fs.promises.mkdtemp(path.join(os.tmpdir(), 'remotion-'));
@@ -106,6 +106,20 @@ app.get(
 		await fs.promises.unlink(output);
 	})
 );
+
+app.get('/comps', async (req, res) => {
+	res.json({comps: await getCompositions(await webpackBundling)});
+});
+
+app.post('/bundle', (req, res) => {
+	webpackBundling = bundle(path.join(process.cwd(), 'src/templates/index.tsx'));
+
+	webpackBundling.then(() => {
+		console.log('Done bundling.');
+	});
+
+	res.sendStatus(200);
+});
 
 app.listen(port);
 console.log(helpText(Number(port)));

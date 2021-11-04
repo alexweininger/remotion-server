@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Img} from 'remotion';
-import './fonts.css';
+import '../fonts.css';
 
 const fontFamily = 'Inter';
 
@@ -19,7 +19,7 @@ const gradientText: React.CSSProperties = {
 	fontFamily,
 };
 
-export const PreviewCard: React.FC<{
+const PreviewCard: React.FC<{
 	title: string;
 	img: string;
 }> = ({title, img}) => {
@@ -34,3 +34,5 @@ export const PreviewCard: React.FC<{
 		</>
 	);
 };
+
+export default PreviewCard;
