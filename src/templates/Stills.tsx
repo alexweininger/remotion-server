@@ -24,8 +24,9 @@ const templates: Template[] = [
 		width: 1500,
 		height: 500,
 		defaultProps: {
-			backgroundColor: 'red',
-			thumbnailUrl: '',
+			backgroundColor: 'purple',
+			thumbnailUrl:
+				'https://static-cdn.jtvnw.net/previews-ttv/live_user_jvna-440x248.jpg',
 		},
 		lazyComponent: () => import('./components/TwitchStream'),
 	},
